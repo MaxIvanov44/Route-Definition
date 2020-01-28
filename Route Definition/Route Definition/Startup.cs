@@ -2,7 +2,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Threading.Tasks;
 
 namespace Route_Definition
 {
@@ -18,6 +20,7 @@ namespace Route_Definition
             var myRouteHandler = new RouteHandler(Handle);
             var routeBuilder = new RouteBuilder(app, myRouteHandler);
             routeBuilder.MapRoute("default", "{action=Index}/{name}-{year}");
+            routeBuilder.MapRoute("default2", "{controller}/{action}/{id?}");
             app.UseRouter(routeBuilder.Build());
 
             app.Run(async (context) =>
